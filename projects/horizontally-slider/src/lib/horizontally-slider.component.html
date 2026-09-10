@@ -1,0 +1,22 @@
+<div
+  #leftArrow
+  class="left-arrow"
+  [class.left-arrow--show]="isShowAlwaysArrows ? isShowLeftArrow : isShowLeftArrow && !isTouchDevice"
+>
+  <ng-content select="[left-arrow]"></ng-content>
+</div>
+<div
+  #invisibleHorizontallyScroll
+  class="invisible-horizontally-scroll"
+  [class.invisible-horizontally-scroll--without-gap]=" modificator === 'without-gap'"
+>
+  <ng-content select="[slider]"></ng-content>
+</div>
+
+<div
+  #rightArrow
+  class="right-arrow"
+  [class.right-arrow--show]="isShowAlwaysArrows ? isShowRightArrow : isShowRightArrow && !isTouchDevice"
+>
+  <ng-content select="[right-arrow]"></ng-content>
+</div>

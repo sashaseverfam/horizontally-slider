@@ -1,0 +1,50 @@
+
+:host {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.invisible-horizontally-scroll {
+  scroll-behavior: smooth;
+  position: relative;
+  width: 100%;
+  user-select: none;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  display: flex;
+  gap: 4px;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  &--without-gap {
+    gap: 0;
+  }
+}
+
+.left-arrow, .right-arrow {
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+
+  &--show {
+    display: block;
+  }
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 40px;
+}
+
