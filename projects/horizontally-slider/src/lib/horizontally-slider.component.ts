@@ -52,7 +52,7 @@ export class HorizontallySliderComponent implements OnDestroy {
   @Input() wheelStep = 100;
   @Input() showAlwaysArrows = false;
   @Input() showArrowsOnMobile = false;
-  @Input() variant?: string;
+  @Input() noGap = false;
   @Input() scrollRefresh$ = new Subject<void>();
 
   @ViewChild('track', { static: false })
