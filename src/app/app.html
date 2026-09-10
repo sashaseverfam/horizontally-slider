@@ -10,7 +10,7 @@
     </div>
 
     <div slider class="photo-slider__track">
-      @for (photo of photos; track photo; let i = $index) {
+      @for (photo of photos(); track photo; let i = $index) {
         <div
           class="photo-slider__item"
           [class.photo-slider__item--active]="selectedIndex() === i"

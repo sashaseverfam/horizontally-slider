@@ -1,7 +1,7 @@
 <div
   #leftArrow
   class="horizontally-slider__arrow horizontally-slider__arrow--left"
-  [class.horizontally-slider__arrow--visible]="showAlwaysArrows ? isLeftArrowVisible : isLeftArrowVisible && !isTouchDevice"
+  [class.horizontally-slider__arrow--visible]="leftArrowVisible()"
 >
   <ng-content select="[left-arrow]"></ng-content>
 </div>
@@ -9,7 +9,7 @@
 <div
   #track
   class="horizontally-slider__track"
-  [class.horizontally-slider__track--no-gap]="noGap"
+  [class.horizontally-slider__track--no-gap]="noGap()"
 >
   <ng-content select="[slider]"></ng-content>
 </div>
@@ -17,7 +17,7 @@
 <div
   #rightArrow
   class="horizontally-slider__arrow horizontally-slider__arrow--right"
-  [class.horizontally-slider__arrow--visible]="showAlwaysArrows ? isRightArrowVisible : isRightArrowVisible && !isTouchDevice"
+  [class.horizontally-slider__arrow--visible]="rightArrowVisible()"
 >
   <ng-content select="[right-arrow]"></ng-content>
 </div>

@@ -15,11 +15,13 @@ export class App {
 
   protected readonly selectedChange = output<number>();
 
-  protected readonly photos: SliderPhoto[] = Array.from({ length: 20 }, (_, i) => ({
-    url: `https://picsum.photos/id/${i + 1}/200/300`,
-    name: `Photo ${i + 1}`,
-    alt: `Photo ${i + 1}`,
-  }));
+  protected readonly photos = signal<SliderPhoto[]>(
+    Array.from({ length: 20 }, (_, i) => ({
+      url: `https://picsum.photos/id/${i + 1}/200/300`,
+      name: `Photo ${i + 1}`,
+      alt: `Photo ${i + 1}`,
+    })),
+  );
 
   selectItem(index: number) {
     this.selectedIndex.set(index);
