@@ -1,5 +1,5 @@
 import { Component, output, signal } from '@angular/core';
-import { HorizontallySliderComponent, ISliderPhoto } from 'horizontally-slider';
+import { HorizontallySliderComponent, SliderPhoto } from 'horizontally-slider';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -9,22 +9,20 @@ import { Subject } from 'rxjs';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('angular-horizontally-slider');
-
-  protected readonly updateScroll$ = new Subject<void>();
+  protected readonly scrollRefresh$ = new Subject<void>();
 
   protected readonly selectedIndex = signal<number | null>(null);
 
-  protected readonly itemClicked = output<number>();
+  protected readonly selectedChange = output<number>();
 
-  protected readonly photos: ISliderPhoto[] = Array.from({ length: 20 }, (_, i) => ({
+  protected readonly photos: SliderPhoto[] = Array.from({ length: 20 }, (_, i) => ({
     url: `https://picsum.photos/id/${i + 1}/200/300`,
     name: `Photo ${i + 1}`,
     alt: `Photo ${i + 1}`,
   }));
 
-  onSelect(index: number) {
+  selectItem(index: number) {
     this.selectedIndex.set(index);
-    this.itemClicked.emit(index);
+    this.selectedChange.emit(index);
   }
 }

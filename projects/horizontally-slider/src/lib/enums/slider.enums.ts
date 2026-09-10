@@ -1,4 +1,4 @@
-export enum EArrowAction {
-  STEPNEXTSLIDER = 'stepNextSlider',
-  STEPPREVSLIDER = 'stepPrevSlider',
+export enum ArrowAction {
+  PREV = 'prev',
+  NEXT = 'next',
 }

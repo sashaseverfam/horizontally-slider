@@ -1,14 +1,13 @@
 import { FactoryProvider, inject, InjectionToken, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { fromEvent, Observable, startWith, shareReplay, map } from 'rxjs';
-import { IWindowSize } from '../interfaces/window.interface';
-
+import { WindowSize } from '../interfaces/window.interface';
 
 export const WINDOW = new InjectionToken<Window>('window');
 
 const windowProvider: FactoryProvider = {
   provide: WINDOW,
-  useFactory: (platformId: any) => {
+  useFactory: (platformId: object) => {
     if (isPlatformBrowser(platformId)) {
       return window;
     }
@@ -17,7 +16,7 @@ const windowProvider: FactoryProvider = {
   deps: [PLATFORM_ID],
 };
 
-export const WINDOW_SIZE = new InjectionToken<Observable<IWindowSize>>('window size');
+export const WINDOW_SIZE = new InjectionToken<Observable<WindowSize>>('window size');
 
 const windowSizeProvider: FactoryProvider = {
   provide: WINDOW_SIZE,
@@ -26,7 +25,7 @@ const windowSizeProvider: FactoryProvider = {
     const platformId = inject(PLATFORM_ID);
 
     if (!isPlatformBrowser(platformId)) {
-      return new Observable<IWindowSize>((subscriber) => {
+      return new Observable<WindowSize>((subscriber) => {
         subscriber.next({
           width: 1024,
           height: 768,
@@ -50,11 +49,12 @@ const windowSizeProvider: FactoryProvider = {
           win.innerHeight || 0,
         );
 
-        const innerHeight = win.innerHeight || 0;
-
-        const innerWidth = win.innerWidth || 0;
-
-        return { width, height, innerHeight, innerWidth };
+        return {
+          width,
+          height,
+          innerHeight: win.innerHeight || 0,
+          innerWidth: win.innerWidth || 0,
+        };
       }),
       shareReplay({ bufferSize: 1, refCount: false }),
     );

@@ -1,20 +1,20 @@
-<div class="slider-wrapper">
+<div class="photo-slider">
   <lib-horizontally-slider
-    [isShowAlwaysArrows]="true"
-    [updateScroll$]="updateScroll$"
+    [showAlwaysArrows]="true"
+    [scrollRefresh$]="scrollRefresh$"
   >
-    <div left-arrow class="slider__arrow slider__arrow--left">
+    <div left-arrow class="photo-slider__arrow photo-slider__arrow--left">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
         <path fill="currentColor" d="M20.547 21.453l-6.107-6.12 6.107-6.12-1.88-1.88-8 8 8 8z"></path>
       </svg>
     </div>
 
-    <div slider class="slider__track">
+    <div slider class="photo-slider__track">
       @for (photo of photos; track photo; let i = $index) {
         <div
-          class="slider__item"
-          [class.slider__item--active]="selectedIndex() === i"
-          (click)="onSelect(i)"
+          class="photo-slider__item"
+          [class.photo-slider__item--active]="selectedIndex() === i"
+          (click)="selectItem(i)"
         >
           <img [src]="photo.url" [alt]="photo.alt" />
           <p>{{ photo.name }}</p>
@@ -22,7 +22,7 @@
       }
     </div>
 
-    <div right-arrow class="slider__arrow slider__arrow--right">
+    <div right-arrow class="photo-slider__arrow photo-slider__arrow--right">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
         <path fill="currentColor" d="M11.453 21.787l6.107-6.12-6.107-6.12 1.88-1.88 8 8-8 8z"></path>
       </svg>

@@ -1,11 +1,9 @@
-.slider-wrapper {
+.photo-slider {
   position: relative;
   width: 100%;
   max-width: 800px;
   margin: 40px auto;
-}
 
-.slider {
   &__track {
     display: flex;
     gap: 8px;
