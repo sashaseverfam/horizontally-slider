@@ -1,5 +1,5 @@
 import { Component, output, signal } from '@angular/core';
-import { HorizontallySliderComponent, SliderPhoto } from 'horizontally-slider';
+import { HorizontallySliderComponent, SliderPhoto } from '@severfam/horizontally-slider';
 import { Subject } from 'rxjs';
 
 @Component({

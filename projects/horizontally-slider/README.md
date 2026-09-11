@@ -1,64 +1,167 @@
-# HorizontallySliderComponent
+# Horizontally Slider
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+Angular standalone component for horizontal scrolling with arrow navigation, mouse drag, wheel and touch support.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Installation
 
 ```bash
-ng generate component component-name
+npm install @severfam/horizontally-slider
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Peer Dependencies
 
-```bash
-ng generate --help
+- `@angular/common ^21.2.0`
+- `@angular/core ^21.2.0`
+
+## Usage
+
+```typescript
+import { HorizontallySliderComponent } from '@severfam/horizontally-slider';
+
+@Component({
+  selector: 'app-root',
+  imports: [HorizontallySliderComponent],
+  template: `
+    <lib-horizontally-slider [showAlwaysArrows]="true">
+      <div left-arrow class="arrow arrow--left">
+        <svg>...</svg>
+      </div>
+
+      <div slider class="track">
+        @for (item of items; track item) {
+          <div class="item">{{ item.name }}</div>
+        }
+      </div>
+
+      <div right-arrow class="arrow arrow--right">
+        <svg>...</svg>
+      </div>
+    </lib-horizontally-slider>
+  `,
+})
+export class App {}
 ```
 
-## Building
+## Inputs
 
-To build the library, run:
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `dragStep` | `number` | `5` | Scroll step (px) on wheel event |
+| `clickStep` | `number` | `100` | Scroll step (px) on arrow click |
+| `wheelStep` | `number` | `100` | Scroll step (px) on wheel |
+| `showAlwaysArrows` | `boolean` | `false` | Always show arrows regardless of scroll position |
+| `showArrowsOnMobile` | `boolean` | `false` | Show arrows on touch devices (<=740px) |
+| `noGap` | `boolean` | `false` | Remove gap between items |
+| `scrollRefresh$` | `Subject<void>` | `new Subject()` | Emit to recalculate arrow visibility |
 
-```bash
-ng build horizontally-slider
+## Outputs
+
+| Name | Type | Description |
+|------|------|-------------|
+| `selectedChange` | `number` | Emits index of clicked item |
+
+## Content Projection
+
+The component uses `ng-content` with attribute selectors for three projection slots:
+
+| Attribute | Description |
+|-----------|-------------|
+| `[left-arrow]` | Left arrow content |
+| `[slider]` | Main scrollable content |
+| `[right-arrow]` | Right arrow content |
+
+Each slot is a required `div` with the corresponding attribute:
+
+```html
+<div left-arrow>...</div>
+<div slider>...</div>
+<div right-arrow>...</div>
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## CSS Classes (BEM)
 
-### Publishing the Library
+### Block
 
-Once the project is built, you can publish your library by following these steps:
+`.horizontally-slider__track` — scrollable container with hidden scrollbar
 
-1. Navigate to the `dist` directory:
+### Modifiers
 
-   ```bash
-   cd dist/horizontally-slider
-   ```
+| Class | Description |
+|-------|-------------|
+| `.horizontally-slider__track--no-gap` | Remove gap between items |
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+### Arrows
 
-## Running unit tests
+| Class | Description |
+|-------|-------------|
+| `.horizontally-slider__arrow` | Arrow wrapper (hidden by default) |
+| `.horizontally-slider__arrow--left` | Left arrow position |
+| `.horizontally-slider__arrow--right` | Right arrow position |
+| `.horizontally-slider__arrow--visible` | Show arrow (applied automatically) |
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Default Styles
 
-```bash
-ng test
+```scss
+:host {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.horizontally-slider__track {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.horizontally-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  &--visible {
+    display: flex;
+  }
+
+  &--left { left: 0; }
+  &--right { right: 0; }
+}
 ```
 
-## Running end-to-end tests
+## Interface
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```typescript
+interface SliderPhoto {
+  url: string | SafeResourceUrl;
+  name: string;
+  alt: string;
+  disabled?: boolean;
+}
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Features
 
-## Additional Resources
+- Standalone component (no module required)
+- Mouse drag scrolling (1:1 ratio)
+- Arrow key / click / long-touch navigation
+- Wheel scrolling
+- Touch device support
+- Safari-compatible scroll handling
+- Automatic arrow visibility based on scroll position
+- Window resize reactive
+- `ChangeDetectionStrategy.OnPush` with Angular signals
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+
+MIT

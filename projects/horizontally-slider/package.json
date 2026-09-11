@@ -1,6 +1,18 @@
 {
-  "name": "horizontally-slider",
+  "name": "@severfam/horizontally-slider",
   "version": "0.0.1",
+  "description": "Angular standalone component for horizontal scrolling with arrow navigation, mouse drag, wheel and touch support",
+  "keywords": [
+    "angular",
+    "slider",
+    "horizontal-scroll",
+    "carousel",
+    "drag-scroll",
+    "touch-friendly",
+    "standalone-component",
+    "ng-content-projection"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0"

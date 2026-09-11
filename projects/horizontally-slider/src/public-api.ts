@@ -1,5 +1,5 @@
 /*
- * Public API Surface of horizontally-slider
+ * Public API Surface of @severfam/horizontally-slider
  */
 
 export * from './lib/horizontally-slider.component';
